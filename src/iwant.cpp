@@ -26,6 +26,35 @@ void * Ciwant::who_am_i()
 }
 
 #if IWANT_TEST
+#include <thread>         // std::thread
+void foo()
+{
+	// do stuff...
+	cout << "void foo()\n";
+}
+
+void bar(int x)
+{
+	// do stuff...
+	cout << "void bar(int x)"<<x<<endl;
+}
+
+int thread_test()
+{
+	std::thread first(foo);     // spawn new thread that calls foo()
+	std::thread second(bar, 99);  // spawn new thread that calls bar(0)
+
+	std::cout << "main, foo and bar now execute concurrently...\n";
+
+	// synchronize threads:
+	first.join();                // pauses until first finishes
+	second.join();               // pauses until second finishes
+
+	std::cout << "foo and bar completed.\n";
+
+	return 0;
+}
+
 int main(int argc ,char *argv[])
 {
 	Object o;
@@ -47,7 +76,7 @@ int main(int argc ,char *argv[])
 	p->who_am_i();
 
 	cout<<"Hello iwant APP .\n";
-
+	thread_test();
 	return 0;
 }
 #endif//IWANT_TEST
