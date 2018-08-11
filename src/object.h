@@ -2,6 +2,7 @@
 #define OBJECT_H
 
 #include <iostream>
+#include <fstream>
 #include <thread>
 #include <string>
 #include <list>
@@ -9,22 +10,38 @@
 #include <stdlib.h>     /* system, NULL, EXIT_FAILURE */
 #include <string.h>
 #include <time.h>       /* time_t, time */
+#include <wchar.h>
+#include <stack> 
+#include <map>
+#include <exception>
 
 #include "temp_def.h"
 #include "syntax_def.h"
+#include "ex_func.h"
+#include "uuid.h"
+#include "bits.def"
+#include "action_type.h"
+#include "data.h"
 
 //using namespace std; //remove fixed std::bind  conflict socket bind
 using std::string;
-using std::list;
-using std::cout;
+using std::wstring;
+//using std::list;
+//using std::cout;
 using std::endl;
+
+enum UsingLanguage
+{
+	EnglishLanguage,
+	SimplifiedChinese,
+};
 
 typedef int(*MyFunc)(void *p); //return <0 do nothing , ==0 success, >0 fail
 
 int object_func(void *p);
-int  runcmd(void *cmd);
+int runcmd(void *cmd);
 
-#define PAGE_4K	(4*1024) 
+#include "object_def.h"
 
 namespace n_object {
 
@@ -34,15 +51,32 @@ namespace n_object {
 		void *in;
 		void *out;
 		int size;
+		std::stack<void *> s; //parameter stack
 	public:
 		Cparameter();
+		~Cparameter();
 	};
+
+	class CtagItem //out=temp+Temp.tag->rep
+	{
+	public:
+		string tag;
+		string temp;
+		string replace;
+		int status;//0 :enable  1:disable ,-1:not init
+	public:
+		CtagItem();
+		CtagItem(string tag,string temp,string replace);
+		CtagItem(char* tag,char* temp,char* replace);
+	};
+	typedef std::list<CtagItem> LIST_TAGITEM;
 
 	class Cmyfunc {
 	public:
 		string name; //function name
 		string alias;//Alias function name
 		MyFunc p_func;
+		long long priority;
 	public:
 		Cmyfunc(string fun_name, MyFunc func);
 		int isMe(char *identifier);
@@ -51,42 +85,110 @@ namespace n_object {
 		int runMe(void *p, bool new_thread=false);
 	};
 
-	typedef list<Cmyfunc> LIST_CMYFUNC;
-	typedef list<void *> LIST_FAMILY;//family list type
+	typedef std::list<Cmyfunc> LIST_CMYFUNC;
+	typedef std::list<void *> LIST_FAMILY;//family list type
 
-	class Object
+	enum class TimelineStatus{
+		now,
+		past,
+		future,
+	};
+
+	class Ctimeline
+	{
+	public:
+		TimelineStatus status;
+		std::multimap<void *, void *> track; //1. void * point timer , 2. void * point Object
+	};
+	typedef std::list<Ctimeline> LIST_CTIMELINE;
+
+	class Ccmd //command class
+	{
+	public:
+		int argc;
+		char ** argv;
+	public:
+		Ccmd(){argc = 0, argv = nullptr;}
+	};
+
+	class Cstatus :public Udata//status class
+	{
+	};
+
+	class Object:public Ouuid
 	{
 	protected:
 		long id;//object id
 	public:
-		int status;
-		int action;
+		Udata udata;
+		Cstatus status;
+		int silent;//can use to print or not print
+		long long priority;
+		ACTION_T action; //bit 0-64 or 0- max [n] for action flag 
+		ActionInfo * action_info;
+		int error; //error count >0 error
+		int count;
+		int cin_buf_len;
+		char *cin_buf;
 
 		string name; //object name
 		string alias;//Alias object name
+		string description;
+		
+		//time and clock
+		struct tm * tm_start,*tm_at,*tm_end;
+		time_t start_time;//for class memory time
 		time_t at_time;
+		time_t end_time;
+		clock_t start_clock;
 		clock_t at_clock;
+		clock_t end_clock;
 
 		string syntax;//this for keyword object
 		string temp;//keyword template 
+		string s_tag;
+		string s_rep;
+
 		long locate;//0 start , -1 end , n :locate value 
+		int language;
+		int direction;
+		int value;
+		int velocity;
+		//object cmd
+		Ccmd cmd;
 
-		list<void *> family;//class list
-		list<void *> exist_family;//class exist other family for removeMe frome other class 。
+		std::list<void *> family;//class list
+		std::list<void *> exist_family;//class exist other family for removeMe frome other class 。
 
-		list<Cmyfunc> ex_func;//extern function list 
+		std::list<Cmyfunc> ex_func;//extern function list 
+		std::list<CtagItem> l_tag_rule;//for tag rule 
+
+		std::list<Object *> my_mem;//list for  memory address 
+		std::list<Object *> exist_list; //for list<Object *> my_mem;  where exist me ,for remove me;
+		std::list<Ctimeline> obj_track;//use time as key for recoder the object space track and status
+
+		std::list<void *> l_url;//url list
+		std::list<void *> l_style;//object style list
+		std::list<void *> l_image;//object image list
+		std::list<void *> l_audio;//object audio list
+		std::list<void *> l_video;//object vedio list
 		
-		list<Object *> my_mem;//list for  memory address 
-		list<Object *> exist_list; //for list<Object *> my_mem;  where exist me ,for remove me;
+		//url can be by used class Cpath
+		string s_url; //Record a url string 
+		string s_term;
+		wstring ws_url;//Record a url wstring
+		wstring ws_term;
+		string s_cmd; //Record a url string 
 
 	public:
 		Object();//set object name
 		~Object();//clears
 
-		void myName(Object *o=NULL);
-		void addMe(Object * o = NULL);//add obj to family
-		void removeMe(void * item); //frome other class
+		void myName(Object *o=nullptr);
+		void addMe(Object *o=nullptr);//add obj to family
+		void removeMe(void * item); //from other class
 		void remove_exist_family();
+		int  sort_family(void *p=nullptr);//p point cmpare function : bool cmp_family(Object & first, Object & second)
 
 		int isMe(char *identifier);
 		int isMe(string * identifier);
@@ -95,7 +197,7 @@ namespace n_object {
 
 		bool add_ex_func(string fun_name, MyFunc func);
 		void add_memory(Object *m);
-		void clear_my_memory(Object *m=NULL);//if null clear all item in my_mem list
+		void clear_my_memory(Object *m=nullptr);//if null clear all item in my_mem list
 		void clear_exist();//clear me in exsit list;
 
 		long my_id();
@@ -104,23 +206,191 @@ namespace n_object {
 		void my_temp();
 		void my_syntax();
 
-		int execute(Object *o, string obj_name , string fun_name , void * p = NULL, bool new_thread = false);
-		int execute(Object *o, string *obj_name = NULL, string * fun_name = NULL, void * p = NULL, bool new_thread = false);
-		int execute(void * p = NULL);//execute this->func 
-		int execute(MyFunc func, void * p = NULL, bool new_thread = false); //execute input func 
-		int execute(string *fun_name, void * p = NULL, bool new_thread = false); //execute this->ex_func 
-		int execute(char * fun_name, void * p = NULL, bool new_thread = false); //execute this->ex_func 
-		int execute(string fun_name,void * p = NULL, bool new_thread = false); //execute this->ex_func 
+		int inc_error();
+		int is_error();
+		int get_error();
+		int set_count(int ct);
+		int get_count();
+		bool get_s(char ** s ,int size);
+		bool wait_cin(int size=O_BUF_LEN);
+		char * at_cin_buf(char * str);//is exist
+
+		//execute myfunc ,object, my_family func
+		int execute();
+		int execute(Object *o);//execute o->execute()
+		int execute(Object *o, string obj_name , string fun_name , void *p=nullptr, bool new_thread = false);
+		int execute(Object *o, char  *obj_name , char * fun_name , void *p=nullptr, bool new_thread = false);
+		int execute(Object *o, string *obj_name=nullptr, string * fun_name = NULL, void *p=nullptr, bool new_thread = false);
+		int execute(void *p);//execute this->func
+		virtual int execute(void *p1,void *p2);//execute 
+		virtual int execute(void *p1,void *p2,void *p3);//execute 
+		int execute(Object *o, void *p);//o->execute(void *p)
+		int execute(MyFunc func, void *p=nullptr, bool new_thread = false); //execute input func 
+		int execute(string *fun_name, void *p=nullptr, bool new_thread = false); //execute this->ex_func 
+		int execute(char * fun_name, void *p=nullptr, bool new_thread = false); //execute this->ex_func 
+		int execute(string fun_name,void *p=nullptr, bool new_thread = false); //execute this->ex_func 
+		
 		int allot(int size,void ** o_addr);
 		int allot(int old_size, void ** o_addr, int new_size, bool mem_cpy=false);
 		void delete_allot(void **addr);
-		virtual Object * i_am_here();//object address
-		virtual Object * who_am_i();//object introduces
-		virtual int are_you_ok();//return current status , default is  normal ,success , pass ,OK  .... 
-		virtual int func(void *p = NULL); // callback function
-		virtual int create(void *p=NULL);//No gun, no cannons, we made ourselves, We create ourselves and create the future.(Objetc::create)
-		virtual int my_init(void *p=NULL);//object init
-		virtual int my_exit(void *p=NULL);//object exit
+
+		void s_toupper(string & str);
+		int s_replace(string *base,string *tag,string *rep);
+		int s_replace(string *base, char *tag, char *rep);
+		int s_replace(string *base);
+		int toupper_replace(string *base,string *tag,string *rep);
+		int replace_syntax(string *tag,string *rep);
+		int replace_temp(string *tag,string *rep);
+		int replace_syntax(int upper_s=0);
+		int replace_temp(int upper_s=0);
+		int tag_temp(char *tag_value,int upper_s=1);
+		int add_tag_rule(CtagItem i);
+		int add_tag_rule(string tag, string temp, string replace);
+		int add_tag_rule(char* tag, char* temp, char* replace);
+		int my_tag_rule();
+
+		int set_time(struct tm *t,int tm_mon,int tm_mday,int tm_year=0,int tm_hour=0,int tm_min=0,int tm_sec=0,int tm_wday=-1,int tm_yday=-1);
+		int cmp_time(struct tm *t1,struct tm *t2);
+		void delay_clock(clock_t count);
+		
+		//is func
+		bool is_identifier(char *str,void ** o_addr =nullptr); 
+		bool is_path(char *str,void ** o_addr=nullptr);
+		bool is_definable(char *s);
+		//Convert
+		string wc_s(wchar_t* wc);
+		wstring s_ws(string * sp);
+		string ws_s(wstring* ws);
+		//system command
+		int sys_cmd(char * cmd);
+		int sys_cmd(string *cmd);
+		int sys_cmd();
+		int get_cmd(int argc, char *argv[],char *cmd);
+		int list_cmd(int argc, char *argv[]);
+		int dispatch_cmd(int argc, char *argv[]);
+		int dispatch_runme(void * myname, void *p = nullptr);
+		int clear(void *p=nullptr);
+		//action
+		bool is_action(ACTION_T a, ACTION_T t, EatcionRelation r);//a action value ,t action type ,e operate
+		int deal_action(Action * a, int count, Object * o= nullptr);//do action table 
+		int action_help(Action * a, int count);
+		ACTION_T get_action(Action * a, int count,char * name);
+		virtual int do_action(void * a);
+		//virtual
+		virtual Object * get_class();//object addressS
+		virtual Object * where();//object address
+		virtual Object * who();//object introduces
+		virtual time_t * when();
+		virtual int how();//return current status , default is  normal ,success , pass ,OK  .... 
+		virtual int func(void *p=nullptr); // callback function
+		virtual int create(void *p=nullptr);//No gun, no cannons, we made ourselves, We create ourselves and create the future.(Objetc::create)
+		virtual int my_init(void *p=nullptr);//object init
+		virtual int my_exit(void *p=nullptr);//object exit
+		virtual int my_clear(void *p=nullptr);
+		virtual int deal_cmd(int argc, char *argv[]);
+		virtual int display(void *p=nullptr);
+		virtual int question(void *p=nullptr);
+		virtual int url(void *p=nullptr);//execute object url if exist
+		virtual int style(void *p=nullptr);//execute object style
+		virtual int image(void *p=nullptr);//execute object image if exist
+		virtual int audio(void *p=nullptr);//execute object audio if exist
+		virtual int video(void *p=nullptr);//execute object vedio if exist
+		virtual int get(void *p=nullptr);//get data ,url ,download file and so on ...
+		virtual int help(void *p = nullptr);//Can be used for command line help
+		virtual int ui(void *p = nullptr);//UI:User Interface , include Graphic interface(GUI), Audio interface(AUI), video interface(VUI),Text Interface (TUI)
+		virtual int event(void *p = nullptr);
+		virtual int task(void *p = nullptr);//Execution task queue
+		virtual int interrupt(void *p = nullptr);
+		virtual int callback(void *p = nullptr);//objec callback
+		virtual int exception(void *p = nullptr);//Respond or issue an exception
+		virtual int message(void *p = nullptr);//Passing and processing messages
+		virtual int feedback(void *p = nullptr);//send and accept feedback info
+		virtual int runme(void * myname, void *p= nullptr);
+		//Arithmetic Operators
+		Object  operator+(Object *o) { this->addMe(o); }
+		Object  operator+(Udata *o) { this->udata.data.ull += o->data.ull; }
+		Object  operator-(Object *o) { this->removeMe(o);}
+		Object  operator-(Udata *o) { this->udata.data.ull -= o->data.ull; }
+		Object  operator*(Object *o) { this->udata.data.ull *= o->udata.data.ull; }
+		Object  operator/(Object *o) { if(o->udata.data.ull) this->udata.data.ull /= o->udata.data.ull; }
+		Object  operator%(Object *o) { if(o->udata.data.ull )this->udata.data.ull %= o->udata.data.ull; }
+		//Relational Operators
+		 bool operator==(char *identifier) { return (0 != this->isMe(identifier)); }
+		 bool operator==(string * identifier) { return (0 != this->isMe(identifier)); }
+		 bool operator==(string identifier) { return (0 != this->isMe(identifier)); }
+		 bool operator==(int id) { return (0 != this->isMe(id)); }
+		 bool operator==(Object *o) { return (this->uuid==o->uuid); }
+		 bool operator!=(char *identifier) { return (0 == this->isMe(identifier)); }
+		 bool operator!=(string * identifier) { return (0 == this->isMe(identifier)); }
+		 bool operator!=(string identifier) { return (0 == this->isMe(identifier)); }
+		 bool operator!=(int id) { return (0 == this->isMe(id)); }
+		 bool operator!=(Object *o) { return !(this->uuid == o->uuid); }
+		 bool operator < (Object& o) { return (this->name < o.name); }
+		 bool operator <= (Object& o) { return (this->name <= o.name); }
+		 bool operator > (Object&o) { return (this->name > o.name); }
+		 bool operator >= (Object&o) { return (this->name >= o.name); }
+		 //Logical Operators
+		 bool operator || (Object&o) { return this->udata.data.ull || o.udata.data.ull; }
+		 bool operator && (Object&o) { return this->udata.data.ull && o.udata.data.ull; }
+		 bool operator ! () { return !this->udata.data.ull; }
+		 //Positive and negative operators
+		/* 
+		Object& operator + () { }
+		 Object& operator - () { }
+		 Object* operator & () { return this; }
+		 Object& operator * () { }
+		 */
+		 //Self-increasing, self-decreasing operator
+		 Object& operator ++ () { ++this->udata.data.ull; }//before ++
+		 Object operator ++ (int i) { this->udata.data.ull++; }
+		 Object& operator --() { --this->udata.data.ull; }//before--
+		 Object operator -- (int i) { this->udata.data.ull--; }
+		 //Bit operators
+		 Object operator | (Object& o) { this->udata.data.ull|=o.udata.data.ull; }
+		 Object operator & (Object& o) { this->udata.data.ull &= o.udata.data.ull; }
+		 Object operator ^ (Object& o) { this->udata.data.ull ^= o.udata.data.ull; }
+		 Object operator << (int i){ this->udata.data.ull <<= i; }
+		 Object operator >> (int i) { this->udata.data.ull >>= i; }
+		 Object operator ~ () { this->udata.data.ull= ~this->udata.data.ull; }
+		 //Assignment operators
+		 Object& operator += (const Object& o) { this->udata.data.ull += o.udata.data.ull; }
+		 Object& operator -= (const Object& o) { this->udata.data.ull -= o.udata.data.ull; }
+		 Object& operator *= (const Object& o) { this->udata.data.ull *= o.udata.data.ull; }
+		 Object& operator /= (const Object& o) { if(o.udata.data.ull) this->udata.data.ull /= o.udata.data.ull; }
+		 Object& operator %= (const Object& o) { if (o.udata.data.ull) this->udata.data.ull %= o.udata.data.ull; }
+		 Object& operator &= (const Object& o) { this->udata.data.ull &= o.udata.data.ull; }
+		 Object& operator |= (const Object& o) { this->udata.data.ull |= o.udata.data.ull; }
+		 Object& operator ^= (const Object& o) { this->udata.data.ull ^= o.udata.data.ull; }
+		 Object& operator <<= (int i) { this->udata.data.ull <<=i; }
+		 Object& operator >>= (int i) { this->udata.data.ull >>=i; }
+		 //Memory operator
+		 /*
+		 void *operator new(size_t size) { }
+		 void *operator new(size_t size, int i) { }
+		 void *operator new[](size_t size) {}
+		 void operator delete(void*p) { }
+		 void operator delete(void*p, int i, int j) { }
+		 void operator delete[](void* p) {}
+		 */
+		 //Special operator
+		 Object& operator = (const Object& o) { this->udata.data.ull = o.udata.data.ull; }
+		 /*
+		 char operator [] (int i) {}
+		 const char* operator () () {}
+		 udata operator -> () { return this->udata; }
+		 operator char* () const {}
+		 operator int() {}
+		 operator const char() const {}s
+		 operator short int() const {}
+		 operator long long() const {}
+		 */
+	};
+
+	class Cobject:public Object
+	{
+	public:
+		Cobject();
+		int my_init(void *p= nullptr);
 	};
 }
 

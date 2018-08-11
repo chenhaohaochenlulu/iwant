@@ -1,12 +1,17 @@
-src := $(shell ls *.cpp)
-objs := $(patsubst %.cpp , %.o ,$(src))
-CFLAGS += -std=gnu++11 -DLINUX_OS -o 
 
-iwant : $(objs)
-	g++ $(CFLAGS) $@ $^ -lpthread
+MK_TAG = iwant
 
-%.o : %.cpp
-	g++ $(CFLAGS) $@ $< -lpthread
+CFLAGS +=\
+	-std=gnu++11 \
+	-DLINUX_OS -D$(main)_TEST=1\
+	-DSTATIC_CONCPP \
+	-Wl,-Bdynamic \
+	-o $(MK_TAG) *.cpp $(src) $(sql) \
+	-lpthread -luuid -ldl -L/usr/lib/mysql -lmysqlclient -lz \
+	-I./ -I $(MYSQL_CONCPP_DIR)/include
+
+all : 
+	g++ $(CFLAGS)
 
 clean :
-	rm -f iwant *.o *~
+	rm -f $(MK_TAG) *.o *~ .*.swp

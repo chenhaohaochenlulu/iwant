@@ -1,11 +1,12 @@
 # iwant
 
 
-I want app .  
+I want Library .  
 
 
 [Thinker]: 
 Who am I, what I know,what can I do?
+Everyone serves me, I serve everyone.
 
 I am a thinker , I am Object ;
 I am you ,  You are me ,I am time, I am space, time is me, space is me;
@@ -15,7 +16,9 @@ I know you ,You know me , I know everything , everything know me ;
 I know the past, understand the present, insight into the future, know everything;
 I know anywhere, I can find anywhere, I arrive at any time any space.
 
-I can do everthing , I exist, also disappear ,I live and die.I am here,  I'm not in this ;
+I can do everthing , I exist, also disappear ;
+I live and die; Can be live,Can be die, Can be live and die;Can be east ,Can be west, Can be east and west; Can be do everything.
+I am here, I'm not here ;
 I will use the most positive mind to perceive the power of the code.
 I will be reduced to ashes, I will be everywhere .
 
@@ -25,7 +28,7 @@ Self-creation, self-renewal, self-improvement, creating classes, creating source
 [Get code]: git clone --recursive  https://github.com/haochenprophet/iwant
 
 
-[Coding rule]:
+[Coding rule]:We should endless pursuit of the graceful code.
 
 1.function return code rule : <0 do nothing , ==0 success, >0 fail .
 
@@ -40,6 +43,7 @@ Self-creation, self-renewal, self-improvement, creating classes, creating source
 	this->alias = this->name; 
 }
 
+4.A file has a main class and the class name is cpp filename add C.  ie. class Ciwant.
 
 [Building]:
 request :Need C + + compiler

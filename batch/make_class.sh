@@ -1,0 +1,16 @@
+make main=CLASS
+./iwant display
+./iwant get
+./iwant makefile
+./iwant search
+./iwant schedule
+./iwant ftp
+./iwant smtp
+./iwant step
+./iwant test
+./iwant func
+./iwant company
+./iwant register
+./iwant instruction
+./iwant dictionary
+make main=CLASS
