@@ -13,3 +13,9 @@ src/dictionary/dictionary
 sample-code/win-test/Debug*/*
 sample-code/win-test/x64/*
 sample-code/win-test/.vs/*
+src/math/*.bat
+src/math/*.exe
+src/math/*.dll
+src/string/*.bat
+src/string/*.exe
+src/string/*.dll

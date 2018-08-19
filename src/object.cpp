@@ -8,18 +8,6 @@
 #define OBJECT_DEBUG 0//1
 #endif
 
-Cparameter::Cparameter()
-{
-	this->in=nullptr;
-	this->out=nullptr;
-	this->size=0;
-}
-
-Cparameter::~Cparameter()
-{
-	while (!this->s.empty()) this->s.pop(); //exit clear stack 
-}
-
 CtagItem::CtagItem()
 {
 	this->status = 0;
@@ -83,6 +71,20 @@ int object_func(void *p)//this ext function for object class
 	return 0;
 }
 
+Otime::Otime()
+{
+	time(&this->at_time);
+	this->start_time = this->at_time;
+	this->end_time = this->at_time;
+	this->tm_start = localtime(&this->start_time);//init tm
+	this->tm_at = localtime(&this->at_time);
+	this->tm_end = localtime(&this->end_time);
+
+	this->at_clock = clock();
+	this->start_clock = at_clock;
+	this->end_clock = at_clock;
+}
+
 long object_id = 0;
 Object::Object()
 {
@@ -101,17 +103,6 @@ Object::Object()
 	this->add_ex_func("runcmd", runcmd);
 	//this->addMe();//remove add this to family list
 
-	time (&this->at_time);
-	this->start_time=this->at_time;
-	this->end_time=this->at_time;
-	this->tm_start = localtime (&this->start_time);//init tm
-	this->tm_at = localtime (&this->at_time);
-	this->tm_end = localtime (&this->end_time);
-
-	this->at_clock=clock();
-	this->start_clock=at_clock;
-	this->end_clock=at_clock;
-
 	this->language=EnglishLanguage;
 	this->count=0;
 	this->direction=0;
@@ -119,7 +110,9 @@ Object::Object()
 	this->velocity=0;
 	this->cin_buf=nullptr;
 	this->cin_buf_len=O_BUF_LEN;//defatult =O_BUF_LEN for allot buf
-
+	this->input = nullptr;
+	this->move = nullptr;
+	this->register_all_signal();
 #if OBJECT_DEBUG
 	AT_LINE this->myName();
 #endif
@@ -140,6 +133,7 @@ Object::~Object()
 	//this->remove_exist_family();// error exception !!
 	this->exist_family.clear();
 	this->clear_my_memory();//clear my memory
+	this->clear_relation();
 	this->my_mem.clear();
 	this->clear_exist();
 	this->exist_list.clear();
@@ -166,6 +160,41 @@ void Object::myName(Object *o)
 		return;
 	}
 	std::cout << "name:" << this->name << " alias:"<<this->alias <<" id:"<< this->id << " uuid:" << this->uuid <<" at:"<<this->where()<< endl;
+}
+
+int Object::add_relation(Object *o, Orelation * r)//add obj relation to object relation list
+{
+	if (!(o&&r))	return -1;//check not nullptr
+	try {
+		ObjectRelation * obj_r = new ObjectRelation();
+		this->l_relation.push_back(obj_r);
+		return 0;
+	}
+	catch (...)
+	{
+		OUT_ERROR;
+	}
+	return -1;
+}
+
+int Object::clear_relation()
+{
+#if OBJECT_DEBUG
+	AT_LINE
+#endif
+	ObjectRelation * obj_r;
+	while (!this->l_relation.empty())
+	{
+		obj_r = this->l_relation.back();
+		try {
+			delete obj_r;//del  new ObjectRelation();
+		}
+		catch(...){
+			OUT_ERROR;
+		}
+		this->l_relation.pop_back();
+	}
+	return 0;
 }
 
 void Object::addMe(Object * o)
@@ -882,6 +911,20 @@ int Object::task(void *p)
 #endif
 		return -1;
 }
+int Object::transaction(void *p)
+{
+#if OBJECT_DEBUG
+	OUT_LINE
+#endif
+		return -1;
+}
+int Object::commit(void *p)
+{
+#if OBJECT_DEBUG
+	OUT_LINE
+#endif
+		return -1;
+}
 int Object::interrupt(void *p)
 {
 #if OBJECT_DEBUG
@@ -917,6 +960,152 @@ int Object::feedback(void *p)
 #endif
 		return -1;
 }
+//The object's  past function, Related to time, action, and condition
+int Object::past(void *p)
+{
+#if OBJECT_DEBUG
+	OUT_LINE
+#endif
+		return -1;
+}
+int Object::rollback(void *p)
+{
+#if OBJECT_DEBUG
+	OUT_LINE
+#endif
+		return -1;
+}
+int Object::previous(void *p)
+{
+#if OBJECT_DEBUG
+	OUT_LINE
+#endif
+		return -1;
+}
+//The object's  future function, 
+int Object::future(void *p)
+{
+#if OBJECT_DEBUG
+	OUT_LINE
+#endif
+		return -1;
+}
+int Object::next(void *p)
+{
+#if OBJECT_DEBUG
+	OUT_LINE
+#endif
+		return -1;
+}
+//A object's future callback function, called at a certain time, location, event, condition ....of the object's future
+int Object::reservation(void *p)
+{
+#if OBJECT_DEBUG
+	OUT_LINE
+#endif
+		return -1;
+}
+int Object::current(void *p)
+{
+#if OBJECT_DEBUG
+	OUT_LINE
+#endif
+		return -1;
+}
+int Object::secure(void *p) //Verify and return to a safe state
+{
+#if OBJECT_DEBUG
+	OUT_LINE
+#endif
+		return -1;
+}
+//The object's  condition function, 
+int Object::condition(void *p)
+{
+#if OBJECT_DEBUG
+	OUT_LINE
+#endif
+		return -1;
+}
+int Object::depend(void *p)
+{
+#if OBJECT_DEBUG
+	OUT_LINE
+#endif
+		return -1;
+}
+int Object::environment(void *p) 
+{
+#if OBJECT_DEBUG
+	OUT_LINE
+#endif
+		return -1;
+}
+int Object::context(void *p) 
+{
+#if OBJECT_DEBUG
+	OUT_LINE
+#endif
+		return -1;
+}
+int Object::go(void *p)
+{
+#if OBJECT_DEBUG
+	OUT_LINE
+#endif
+		return -1;
+}
+
+int Object::register_all_signal(int signum)
+{
+	//SIGINT , SIGILL ,SIGFPE, SIGSEGV,SIGTERM , SIGBREAK , SIGABRT  SIGABRT_COMPAT  
+	this->register_signal(SIGINT);
+	this->register_signal(SIGILL);
+	this->register_signal(SIGFPE);
+	this->register_signal(SIGSEGV);
+	this->register_signal(SIGTERM);
+	this->register_signal(SIGABRT);
+#ifdef WINDOWS_OS
+	this->register_signal(SIGBREAK);
+	this->register_signal(SIGABRT_COMPAT);
+#endif
+	return 0;
+}
+
+Object object_global;
+void signal_handler(int signum)
+{
+	object_global.rejoin_signal(signum);
+	switch (signum)
+	{
+	case SIGILL:
+	case SIGFPE:
+	case SIGSEGV:
+	case SIGTERM:
+	case SIGABRT:
+#ifdef WINDOWS_OS
+	case SIGBREAK:
+	case SIGABRT_COMPAT:
+#endif
+		exit(signum);
+	case SIGINT:
+		//...
+	default:
+		break;
+	}
+}
+
+int Object::register_signal(int signum)
+{
+	signal(signum, signal_handler);
+	return 0;
+}
+
+int Object::rejoin_signal(int signum)
+{
+	OUT_LINE_N(signum);
+	return -1;
+}
 //return{<0 do nothing -1:nofind -2 empty ;  =0 pass ; >0 error}
 int Object::dispatch_runme(void * myname, void *p)
 {
@@ -940,8 +1129,27 @@ int Object::dispatch_runme(void * myname, void *p)
 	return -1;
 }
 
+int Object::transfer(void * myname, void *p, Object *o)
+{
+	if (o) return o->runme(myname, p);
+	return this->runme(myname, p);
+}
 int Object::runme(void * myname, void *p) //p:parameter
 {
+//	if (strcmp((char *)myname, (char *)"transfer") == 0) return this->transfer(p);
+	if (strcmp((char *)myname, (char *)"go") == 0) return this->go(p);
+	if (strcmp((char *)myname, (char *)"past") == 0) return this->past(p);
+	if (strcmp((char *)myname, (char *)"rollback") == 0) return this->rollback(p);
+	if (strcmp((char *)myname, (char *)"previous") == 0) return this->previous(p);
+	if (strcmp((char *)myname, (char *)"future") == 0) return this->future(p);
+	if (strcmp((char *)myname, (char *)"next") == 0) return this->next(p);
+	if (strcmp((char *)myname, (char *)"condition") == 0) return this->condition(p);
+	if (strcmp((char *)myname, (char *)"depend") == 0) return this->depend(p);
+	if (strcmp((char *)myname, (char *)"current") == 0) return this->current(p);
+	if (strcmp((char *)myname, (char *)"environment") == 0) return this->environment(p);
+	if (strcmp((char *)myname, (char *)"context") == 0) return this->context(p);
+	if (strcmp((char *)myname, (char *)"secure") == 0) return this->secure(p);
+	if (strcmp((char *)myname, (char *)"reservation") == 0) return this->reservation(p);
 	if (strcmp((char *)myname, (char *)"feedback") == 0) return this->feedback(p);
 	if (strcmp((char *)myname, (char *)"message") == 0) return this->message(p);
 	if (strcmp((char *)myname, (char *)"exception") == 0) return this->exception(p);
@@ -949,6 +1157,8 @@ int Object::runme(void * myname, void *p) //p:parameter
 	if (strcmp((char *)myname, (char *)"interrupt") == 0) return this->interrupt(p);
 	if (strcmp((char *)myname, (char *)"event") == 0) return this->event(p);
 	if (strcmp((char *)myname, (char *)"task") == 0) return this->task(p);
+	if (strcmp((char *)myname, (char *)"transaction") == 0) return this->transaction(p);
+	if (strcmp((char *)myname, (char *)"commit") == 0) return this->commit(p);
 	if (strcmp((char *)myname, (char *)"help") == 0) return this->help(p);
 	if (strcmp((char *)myname, (char *)"ui") == 0) return this->ui(p);
 	if (strcmp((char *)myname, (char *)"get") == 0) return this->get(p);

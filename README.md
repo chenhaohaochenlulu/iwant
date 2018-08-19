@@ -25,6 +25,8 @@ I will be reduced to ashes, I will be everywhere .
 No gun, no cannons, we made ourselves, We create ourselves and create the future.(Objetc::create)
 Self-creation, self-renewal, self-improvement, creating classes, creating source code, creating Makefiles ... 
 
+I am inside the code, also outside the code.
+
 [Get code]: git clone --recursive  https://github.com/haochenprophet/iwant
 
 
@@ -44,6 +46,9 @@ Self-creation, self-renewal, self-improvement, creating classes, creating source
 }
 
 4.A file has a main class and the class name is cpp filename add C.  ie. class Ciwant.
+
+5.For 'Object' class use the 'O' ,like Ouuid,Oinput .. 
+  namespace name 'n'  n_object , union 'u' or 'U'  like Udata . 
 
 [Building]:
 request :Need C + + compiler

@@ -28,6 +28,21 @@
     <Filter Include="dictionary">
       <UniqueIdentifier>{78a3e1cc-b03e-4548-8432-1e4b156be716}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ctype">
+      <UniqueIdentifier>{81bfebb1-1652-4a74-83ea-ee594e1aa639}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="string">
+      <UniqueIdentifier>{85f46e06-0871-45b3-b766-fb64e7f9d8a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cstdio">
+      <UniqueIdentifier>{13966b13-4819-4e4e-b056-39a63155bfda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cstdlib">
+      <UniqueIdentifier>{0701cf1c-aa92-4cf7-97a6-6550f4f63494}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ctime">
+      <UniqueIdentifier>{96b17931-b01c-43cc-8e56-295913dee589}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\sql\sql_ADD.cpp">
@@ -4427,6 +4442,621 @@
     </ClCompile>
     <ClCompile Include="..\..\src\field.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\data.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\input.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\move.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\relation.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\abs.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\acos.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\acosh.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\asin.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\asinh.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\atan.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\atan2.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\atanh.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\cbrt.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\ceil.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\copysign.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\cos.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\cosh.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\erf.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\erfc.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\exp.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\exp2.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\expm1.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\fdim.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\floor.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\fma.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\fmax.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\fmin.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\fmod.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\frexp.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\hypot.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\ilogb.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\ldexp.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\lgamma.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\llrint.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\llround.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\log.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\log1p.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\log2.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\log10.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\logb.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\lrint.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\lround.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\modf.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\nan.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\nearbyint.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\nextafter.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\nexttoward.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\pow.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\remainder.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\remquo.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\rint.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\round.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\scalbln.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\scalbn.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\sin.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\sinh.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\sqrt.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\tan.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\tanh.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\tgamma.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\trunc.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\math\fabs_.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\isalnum.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\isalpha.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\isblank.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\iscntrl.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\isdigit.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\isgraph.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\islower.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\isprint.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\ispunct.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\isspace.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\isupper.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\iswalnum.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\iswalpha.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\iswblank.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\iswcntrl.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\iswctype.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\iswdigit.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\iswgraph.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\iswlower.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\iswprint.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\iswpunct.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\iswspace.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\iswupper.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\iswxdigit.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\isxdigit.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\tolower.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\toupper.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\towctrans.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\towlower.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\towupper.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\wctrans.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctype\wctype.cpp">
+      <Filter>ctype</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\string\memchr.cpp">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\string\memcmp.cpp">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\string\memcpy.cpp">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\string\memmove.cpp">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\string\memset.cpp">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\string\strcat.cpp">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\string\strchr.cpp">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\string\strcmp.cpp">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\string\strcoll.cpp">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\string\strcpy.cpp">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\string\strcspn.cpp">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\string\strerror.cpp">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\string\strlen.cpp">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\string\strncat.cpp">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\string\strncmp.cpp">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\string\strncpy.cpp">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\string\strpbrk.cpp">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\string\strrchr.cpp">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\string\strspn.cpp">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\string\strstr.cpp">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\string\strtok.cpp">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\string\strxfrm.cpp">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\clearerr.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\fclose.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\feof.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\ferror.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\fflush.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\fgetc.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\fgetpos.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\fgets.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\fopen.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\fprintf.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\fputc.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\fputs.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\fread.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\freopen.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\fscanf.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\fseek.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\fsetpos.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\ftell.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\fwrite.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\getc.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\getchar.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\gets.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\perror.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\printf.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\putc.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\putchar.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\puts.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\remove.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\rename.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\rewind.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\scanf.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\setvbuf.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\snprintf.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\sprintf.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\sscanf.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\tmpfile.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\tmpnam.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\ungetc.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\vfprintf.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\vfscanf.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\vprintf.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\vscanf.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\vsnprintf.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\vsprintf.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdio\vsscanf.cpp">
+      <Filter>cstdio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\_Exit.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\abort.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\at_quick_exit.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\atexit.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\atof.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\atoi.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\atol.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\atoll.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\bsearch.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\calloc.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\free.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\getenv.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\labs.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\ldiv.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\llabs.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\lldiv.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\malloc.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\mblen.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\mbstowcs.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\mbtowc.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\qsort.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\quick_exit.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\rand.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\realloc.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\srand.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\strtod.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\strtof.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\strtol.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\strtold.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\strtoll.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\strtoul.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\strtoull.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\system.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\wcstombs.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\cstdlib\wctomb.cpp">
+      <Filter>cstdlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctime\asctime.cpp">
+      <Filter>ctime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctime\clock.cpp">
+      <Filter>ctime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctime\ctime.cpp">
+      <Filter>ctime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctime\difftime.cpp">
+      <Filter>ctime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctime\gmtime.cpp">
+      <Filter>ctime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctime\localtime.cpp">
+      <Filter>ctime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctime\mktime.cpp">
+      <Filter>ctime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctime\strftime.cpp">
+      <Filter>ctime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ctime\time.cpp">
+      <Filter>ctime</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -8897,6 +9527,639 @@
     <ClInclude Include="..\..\src\main_action.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\data.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\data_class.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\object_def.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\bits_def.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\input.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\input_class.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\move.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\move_class.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\relation.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\relation_class.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\abs.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\acos.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\acosh.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\asin.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\asinh.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\atan.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\atan2.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\atanh.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\cbrt.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\ceil.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\copysign.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\cos.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\cosh.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\erf.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\erfc.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\exp.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\exp2.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\expm1.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\fdim.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\floor.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\fma.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\fmax.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\fmin.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\fmod.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\frexp.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\hypot.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\ilogb.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\ldexp.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\lgamma.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\llrint.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\llround.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\log.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\log1p.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\log2.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\log10.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\logb.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\lrint.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\lround.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\modf.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\nan.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\nearbyint.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\nextafter.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\nexttoward.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\pow.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\remainder.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\remquo.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\rint.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\round.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\scalbln.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\scalbn.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\sin.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\sinh.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\sqrt.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\tan.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\tanh.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\tgamma.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\trunc.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\math\fabs_.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\isalnum.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\isalpha.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\isblank.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\iscntrl.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\isdigit.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\isgraph.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\islower.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\isprint.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\ispunct.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\isspace.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\isupper.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\iswalnum.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\iswalpha.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\iswblank.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\iswcntrl.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\iswctype.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\iswdigit.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\iswgraph.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\iswlower.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\iswprint.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\iswpunct.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\iswspace.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\iswupper.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\iswxdigit.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\isxdigit.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\tolower.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\toupper.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\towctrans.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\towlower.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\towupper.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\wctrans.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctype\wctype.h">
+      <Filter>ctype</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\string\memchr.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\string\memcmp.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\string\memcpy.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\string\memmove.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\string\memset.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\string\strcat.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\string\strchr.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\string\strcmp.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\string\strcoll.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\string\strcpy.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\string\strcspn.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\string\strerror.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\string\strlen.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\string\strncat.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\string\strncmp.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\string\strncpy.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\string\strpbrk.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\string\strrchr.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\string\strspn.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\string\strstr.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\string\strtok.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\string\strxfrm.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\clearerr.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\fclose.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\feof.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\ferror.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\fflush.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\fgetc.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\fgetpos.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\fgets.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\fopen.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\fprintf.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\fputc.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\fputs.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\fread.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\freopen.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\fscanf.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\fseek.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\fsetpos.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\ftell.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\fwrite.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\getc.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\getchar.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\gets.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\perror.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\printf.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\putc.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\putchar.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\puts.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\remove.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\rename.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\rewind.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\scanf.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\setvbuf.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\snprintf.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\sprintf.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\sscanf.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\tmpfile.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\tmpnam.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\ungetc.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\vfprintf.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\vfscanf.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\vprintf.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\vscanf.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\vsnprintf.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\vsprintf.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdio\vsscanf.h">
+      <Filter>cstdio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\_Exit.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\abort.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\at_quick_exit.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\atexit.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\atof.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\atoi.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\atol.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\atoll.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\bsearch.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\calloc.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\free.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\getenv.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\labs.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\ldiv.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\llabs.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\lldiv.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\malloc.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\mblen.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\mbstowcs.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\mbtowc.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\qsort.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\quick_exit.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\rand.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\realloc.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\srand.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\strtod.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\strtof.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\strtol.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\strtold.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\strtoll.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\strtoul.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\strtoull.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\system.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\wcstombs.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\cstdlib\wctomb.h">
+      <Filter>cstdlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctime\asctime.h">
+      <Filter>ctime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctime\clock.h">
+      <Filter>ctime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctime\ctime.h">
+      <Filter>ctime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctime\difftime.h">
+      <Filter>ctime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctime\gmtime.h">
+      <Filter>ctime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctime\localtime.h">
+      <Filter>ctime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctime\mktime.h">
+      <Filter>ctime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctime\strftime.h">
+      <Filter>ctime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ctime\time.h">
+      <Filter>ctime</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\src\Makefile" />
@@ -8912,9 +10175,6 @@
     </None>
     <None Include="..\..\src\dictionary\Makefile">
       <Filter>dictionary</Filter>
-    </None>
-    <None Include="..\..\src\bits.def">
-      <Filter>src</Filter>
     </None>
     <None Include="..\..\src\ex_func_class.h">
       <Filter>src</Filter>
@@ -8936,6 +10196,18 @@
     </None>
     <None Include="..\..\src\main_action.i">
       <Filter>src</Filter>
+    </None>
+    <None Include="..\..\src\instruction\t.php">
+      <Filter>instruction</Filter>
+    </None>
+    <None Include="..\..\src\cstdio\Makefile">
+      <Filter>cstdio</Filter>
+    </None>
+    <None Include="..\..\src\cstdlib\Makefile">
+      <Filter>cstdlib</Filter>
+    </None>
+    <None Include="..\..\src\ctime\Makefile">
+      <Filter>ctime</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

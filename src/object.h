@@ -14,14 +14,18 @@
 #include <stack> 
 #include <map>
 #include <exception>
+#include <csignal> 
 
 #include "temp_def.h"
 #include "syntax_def.h"
 #include "ex_func.h"
 #include "uuid.h"
-#include "bits.def"
+#include "bits_def.h"
 #include "action_type.h"
 #include "data.h"
+#include "input.h"
+#include "move.h"
+#include "relation.h"
 
 //using namespace std; //remove fixed std::bind  conflict socket bind
 using std::string;
@@ -40,6 +44,7 @@ typedef int(*MyFunc)(void *p); //return <0 do nothing , ==0 success, >0 fail
 
 int object_func(void *p);
 int runcmd(void *cmd);
+void signal_handler(int signum);
 
 #include "object_def.h"
 
@@ -48,13 +53,14 @@ namespace n_object {
 	class Cparameter
 	{
 	public:
-		void *in;
+		void *in;//can point Udata[]
 		void *out;
-		int size;
+		int size_in;//in size
+		int size_out;//out_size
 		std::stack<void *> s; //parameter stack
 	public:
-		Cparameter();
-		~Cparameter();
+		Cparameter() { this->in = nullptr;	this->out = nullptr;	this->size_in = 0;	this->size_out = 0; }
+		~Cparameter() { while (!this->s.empty()) this->s.pop(); }//exit clear stack
 	};
 
 	class CtagItem //out=temp+Temp.tag->rep
@@ -114,12 +120,36 @@ namespace n_object {
 	class Cstatus :public Udata//status class
 	{
 	};
+	
+	class Otime //Object 's time O:Object
+	{
+	public://time and clock
+		struct tm * tm_start, *tm_at, *tm_end;
+		time_t start_time;//for class memory time
+		time_t at_time;
+		time_t end_time;
+		clock_t start_clock;
+		clock_t at_clock;
+		clock_t end_clock;
+	public :
+		Otime();
+	};
+	
+	class ObjectRelation
+	{
+	public:
+		void * obj;//point Object 
+		Orelation * relation;//point relation
+	};
+	typedef std::list<ObjectRelation *> LIST_OBJ_RELATION;
 
-	class Object:public Ouuid
+	class Object:public Ouuid, Otime
 	{
 	protected:
 		long id;//object id
 	public:
+		Omove * move;
+		Oinput *input;//set the input point change object input Cparameter
 		Udata udata;
 		Cstatus status;
 		int silent;//can use to print or not print
@@ -135,15 +165,6 @@ namespace n_object {
 		string alias;//Alias object name
 		string description;
 		
-		//time and clock
-		struct tm * tm_start,*tm_at,*tm_end;
-		time_t start_time;//for class memory time
-		time_t at_time;
-		time_t end_time;
-		clock_t start_clock;
-		clock_t at_clock;
-		clock_t end_clock;
-
 		string syntax;//this for keyword object
 		string temp;//keyword template 
 		string s_tag;
@@ -172,7 +193,7 @@ namespace n_object {
 		std::list<void *> l_image;//object image list
 		std::list<void *> l_audio;//object audio list
 		std::list<void *> l_video;//object vedio list
-		
+		LIST_OBJ_RELATION l_relation;//list relation with other object
 		//url can be by used class Cpath
 		string s_url; //Record a url string 
 		string s_term;
@@ -185,6 +206,8 @@ namespace n_object {
 		~Object();//clears
 
 		void myName(Object *o=nullptr);
+		int add_relation(Object *o, Orelation * r);//add obj relation to object relation list
+		int clear_relation();
 		void addMe(Object *o=nullptr);//add obj to family
 		void removeMe(void * item); //from other class
 		void remove_exist_family();
@@ -214,13 +237,15 @@ namespace n_object {
 		bool get_s(char ** s ,int size);
 		bool wait_cin(int size=O_BUF_LEN);
 		char * at_cin_buf(char * str);//is exist
-
+		//set
+		int set(Oinput *i) { this->input = i; return 0; }
+		int set(Omove *m) { this->move = m; return 0; }
 		//execute myfunc ,object, my_family func
 		int execute();
 		int execute(Object *o);//execute o->execute()
 		int execute(Object *o, string obj_name , string fun_name , void *p=nullptr, bool new_thread = false);
 		int execute(Object *o, char  *obj_name , char * fun_name , void *p=nullptr, bool new_thread = false);
-		int execute(Object *o, string *obj_name=nullptr, string * fun_name = NULL, void *p=nullptr, bool new_thread = false);
+		int execute(Object *o, string *obj_name, string * fun_name = nullptr, void *p=nullptr, bool new_thread = false);
 		int execute(void *p);//execute this->func
 		virtual int execute(void *p1,void *p2);//execute 
 		virtual int execute(void *p1,void *p2,void *p3);//execute 
@@ -300,20 +325,39 @@ namespace n_object {
 		virtual int ui(void *p = nullptr);//UI:User Interface , include Graphic interface(GUI), Audio interface(AUI), video interface(VUI),Text Interface (TUI)
 		virtual int event(void *p = nullptr);
 		virtual int task(void *p = nullptr);//Execution task queue
+		virtual int transaction(void *p = nullptr);//task function
+		virtual int commit(void *p = nullptr);//task function
 		virtual int interrupt(void *p = nullptr);
 		virtual int callback(void *p = nullptr);//objec callback
 		virtual int exception(void *p = nullptr);//Respond or issue an exception
 		virtual int message(void *p = nullptr);//Passing and processing messages
 		virtual int feedback(void *p = nullptr);//send and accept feedback info
-		virtual int runme(void * myname, void *p= nullptr);
+		virtual int past(void *p = nullptr);	//The object's  past function, Related to time, action, and condition
+		virtual int rollback(void *p = nullptr);//The object's  past function, 
+		virtual int previous(void *p = nullptr);
+		virtual int future(void *p = nullptr);//The object's  future function, 
+		virtual int next(void *p = nullptr);
+		virtual int reservation(void *p = nullptr);//The object's future callback function, called at a certain time, location, event, condition ....of the object's future
+		virtual int current(void *p = nullptr);		//The object's  current state function, 		
+		virtual int condition(void *p = nullptr);		//The object's  condition function, 
+		virtual int depend(void *p = nullptr);
+		virtual int environment(void *p = nullptr); //Verify and return to a environment state and info
+		virtual int context(void *p = nullptr); //context info
+		virtual int secure(void *p = nullptr); //Verify and return to a safe state
+		virtual int runme(void * myname, void *p= nullptr);	//dispatch my function
+		virtual int transfer(void * myname, void *p=nullptr,Object *o = nullptr); //Transfer runme() to input object,p:parameter
+		virtual int go(void *p = nullptr);	//go function for object move support
+		virtual int register_signal(int signum);
+		virtual int rejoin_signal(int signum);
+		int register_all_signal(int signum=-1);
 		//Arithmetic Operators
-		Object  operator+(Object *o) { this->addMe(o); }
-		Object  operator+(Udata *o) { this->udata.data.ull += o->data.ull; }
-		Object  operator-(Object *o) { this->removeMe(o);}
-		Object  operator-(Udata *o) { this->udata.data.ull -= o->data.ull; }
-		Object  operator*(Object *o) { this->udata.data.ull *= o->udata.data.ull; }
-		Object  operator/(Object *o) { if(o->udata.data.ull) this->udata.data.ull /= o->udata.data.ull; }
-		Object  operator%(Object *o) { if(o->udata.data.ull )this->udata.data.ull %= o->udata.data.ull; }
+		void  operator+(Object *o) { this->addMe(o); }
+		void  operator+(Udata *o) { this->udata.data.ull += o->data.ull; }
+		void  operator-(Object *o) { this->removeMe(o);}
+		void  operator-(Udata *o) { this->udata.data.ull -= o->data.ull; }
+		void  operator*(Object *o) { this->udata.data.ull *= o->udata.data.ull; }
+		void  operator/(Object *o) { if(o->udata.data.ull) this->udata.data.ull /= o->udata.data.ull; }
+		void  operator%(Object *o) { if(o->udata.data.ull )this->udata.data.ull %= o->udata.data.ull; }
 		//Relational Operators
 		 bool operator==(char *identifier) { return (0 != this->isMe(identifier)); }
 		 bool operator==(string * identifier) { return (0 != this->isMe(identifier)); }
@@ -334,35 +378,49 @@ namespace n_object {
 		 bool operator && (Object&o) { return this->udata.data.ull && o.udata.data.ull; }
 		 bool operator ! () { return !this->udata.data.ull; }
 		 //Positive and negative operators
-		/* 
-		Object& operator + () { }
-		 Object& operator - () { }
-		 Object* operator & () { return this; }
-		 Object& operator * () { }
-		 */
+		
+		 void operator + () {}
+		 void operator - () { this->udata.data.ll=(-this->udata.data.ll) ; }
+		// Object* operator & () { return this; }
+		// Object& operator * () { }
+		 // operator ()
+		 int operator ()() { return this->execute(); }
+		 int operator ()(Object *o) { return this->execute(o); }
+		 int operator ()(Object *o, string obj_name, string fun_name, void *p = nullptr, bool new_thread = false) { return this->execute(o,obj_name,fun_name,p,new_thread); }
+		 int operator ()(Object *o, char  *obj_name, char * fun_name, void *p = nullptr, bool new_thread = false) { return this->execute(o, obj_name, fun_name, p ,  new_thread); }
+		 int operator ()(Object *o, string *obj_name, string * fun_name = nullptr, void *p = nullptr, bool new_thread = false) { return this->execute( o,  obj_name,  fun_name ,  p  ,  new_thread ); }
+		 int operator ()(void *p) { return this->execute(p); }
+		 int operator ()(void *p1, void *p2) { return this->execute(p1,p2); }
+		 int operator ()(void *p1, void *p2, void *p3) { return this->execute(p1,p2,p3); }
+		 int operator ()(Object *o, void *p) { return this->execute(o,p); }
+		 int operator ()(MyFunc func, void *p = nullptr, bool new_thread = false) { return this->execute(func,p, new_thread); }
+		 int operator ()(string *fun_name, void *p = nullptr, bool new_thread = false) { return this->execute(fun_name,p,new_thread); }
+		 int operator ()(char * fun_name, void *p = nullptr, bool new_thread = false) { return this->execute(fun_name, p, new_thread); }
+		 int operator ()(string fun_name, void *p = nullptr, bool new_thread = false) { return this->execute(fun_name, p, new_thread); }
+
 		 //Self-increasing, self-decreasing operator
-		 Object& operator ++ () { ++this->udata.data.ull; }//before ++
-		 Object operator ++ (int i) { this->udata.data.ull++; }
-		 Object& operator --() { --this->udata.data.ull; }//before--
-		 Object operator -- (int i) { this->udata.data.ull--; }
+		 void operator ++ () { ++this->udata.data.ull; }//before ++
+		 void operator ++ (int i) { this->udata.data.ull+=i; }
+		 void operator --() { --this->udata.data.ull; }//before--
+		 void operator -- (int i) { this->udata.data.ull-=i; }
 		 //Bit operators
-		 Object operator | (Object& o) { this->udata.data.ull|=o.udata.data.ull; }
-		 Object operator & (Object& o) { this->udata.data.ull &= o.udata.data.ull; }
-		 Object operator ^ (Object& o) { this->udata.data.ull ^= o.udata.data.ull; }
-		 Object operator << (int i){ this->udata.data.ull <<= i; }
-		 Object operator >> (int i) { this->udata.data.ull >>= i; }
-		 Object operator ~ () { this->udata.data.ull= ~this->udata.data.ull; }
+		 void operator | (Object& o) { this->udata.data.ull |= o.udata.data.ull; }
+		 void operator & (Object& o) { this->udata.data.ull &= o.udata.data.ull; }
+		 void operator ^ (Object& o) { this->udata.data.ull ^= o.udata.data.ull; }
+		 void operator << (int i) { this->udata.data.ull <<= i; }
+		 void operator >> (int i) { this->udata.data.ull >>= i; }
+		 void operator ~ () { this->udata.data.ull = ~this->udata.data.ull; }
 		 //Assignment operators
-		 Object& operator += (const Object& o) { this->udata.data.ull += o.udata.data.ull; }
-		 Object& operator -= (const Object& o) { this->udata.data.ull -= o.udata.data.ull; }
-		 Object& operator *= (const Object& o) { this->udata.data.ull *= o.udata.data.ull; }
-		 Object& operator /= (const Object& o) { if(o.udata.data.ull) this->udata.data.ull /= o.udata.data.ull; }
-		 Object& operator %= (const Object& o) { if (o.udata.data.ull) this->udata.data.ull %= o.udata.data.ull; }
-		 Object& operator &= (const Object& o) { this->udata.data.ull &= o.udata.data.ull; }
-		 Object& operator |= (const Object& o) { this->udata.data.ull |= o.udata.data.ull; }
-		 Object& operator ^= (const Object& o) { this->udata.data.ull ^= o.udata.data.ull; }
-		 Object& operator <<= (int i) { this->udata.data.ull <<=i; }
-		 Object& operator >>= (int i) { this->udata.data.ull >>=i; }
+		 void operator += (const Object& o) { this->udata.data.ull += o.udata.data.ull; }
+		 void operator -= (const Object& o) { this->udata.data.ull -= o.udata.data.ull; }
+		 void operator *= (const Object& o) { this->udata.data.ull *= o.udata.data.ull; }
+		 void operator /= (const Object& o) { if (o.udata.data.ull) this->udata.data.ull /= o.udata.data.ull; }
+		 void operator %= (const Object& o) { if (o.udata.data.ull) this->udata.data.ull %= o.udata.data.ull; }
+		 void operator &= (const Object& o) { this->udata.data.ull &= o.udata.data.ull; }
+		 void operator |= (const Object& o) { this->udata.data.ull |= o.udata.data.ull; }
+		 void operator ^= (const Object& o) { this->udata.data.ull ^= o.udata.data.ull; }
+		 void operator <<= (int i) { this->udata.data.ull <<= i; }
+		 void operator >>= (int i) { this->udata.data.ull >>= i; }
 		 //Memory operator
 		 /*
 		 void *operator new(size_t size) { }
@@ -373,7 +431,9 @@ namespace n_object {
 		 void operator delete[](void* p) {}
 		 */
 		 //Special operator
-		 Object& operator = (const Object& o) { this->udata.data.ull = o.udata.data.ull; }
+		 void operator = (const Object& o) { this->udata.data.ull = o.udata.data.ull; }
+		 void operator = (Oinput* i) { this->input = i; }
+		 void operator = (Omove* m) { this->move = m; }
 		 /*
 		 char operator [] (int i) {}
 		 const char* operator () () {}
@@ -393,6 +453,6 @@ namespace n_object {
 		int my_init(void *p= nullptr);
 	};
 }
-
+extern n_object::Object object_global;
 using namespace n_object;
 #endif
